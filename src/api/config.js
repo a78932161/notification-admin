@@ -5,7 +5,7 @@
 
 export const ERR_OK = 0;
 
-export const baseURL = 'http://115.159.154.194/mlshop/';
+export const baseURL = 'http://120.79.40.85:9090';
 
 export const tokenName='x-auth-token';
 

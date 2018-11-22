@@ -1,0 +1,15 @@
+query userList($paginator: paginator){
+  UserList(paginator:$paginator){
+    totalPages
+    totalElements
+    content{
+      id
+      number
+      nickname
+      phone
+      createtime
+      disabled
+    }
+  }
+}
+

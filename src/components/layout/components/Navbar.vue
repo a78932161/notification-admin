@@ -25,6 +25,7 @@
   import {mapGetters} from 'vuex'
   import Breadcrumb from 'base/Breadcrumb'
   import Hamburger from 'base/Hamburger'
+  import {removeToken} from 'common/js/auth'
 
   export default {
     components: {
@@ -42,9 +43,10 @@
         this.$store.dispatch('ToggleSideBar')
       },
       logout() {
-        this.$store.dispatch('LogOut').then(() => {
-          location.reload() // 为了重新实例化vue-router对象 避免bug
-        })
+        removeToken();
+        // this.$store.dispatch('LogOut').then(() => {
+        //   location.reload() // 为了重新实例化vue-router对象 避免bug
+        // })
       }
     }
   }

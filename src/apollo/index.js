@@ -14,24 +14,22 @@ import {tokenName} from 'api/config';
 import capture from './capture';
 
 const httpLink = new HttpLink({
-  uri: 'http://115.159.154.194/mlshop/graphql',
+  uri: 'http://120.79.40.85:9090/graphql',
 });
 
-
 const authMiddleware = new ApolloLink((operation, forward) => {
-   operation.setContext({
-     headers: {
-       [tokenName]: getToken() || null,
-     }
-   });
-   return forward(operation);
- });
-
+  operation.setContext({
+    headers: {
+      [tokenName]: getToken() || null,
+    }
+  });
+  return forward(operation);
+});
 
 
 // Create the apollo client
 const apolloClient = new ApolloClient({
-  link:concat(authMiddleware,httpLink),
+  link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache(),
   connectToDevTools: true,
 });
@@ -41,7 +39,7 @@ Vue.use(VueApollo);
 
 
 const apolloProvider = new VueApollo({
-  errorHandler (error) {
+  errorHandler(error) {
     capture(error);
   },
   defaultClient: apolloClient,
@@ -60,15 +58,15 @@ const apolloProvider = new VueApollo({
        * - standby: only for queries that aren't actively watched, but should be available for refetch and updateQueries.
 
 
-      export type FetchPolicy =
-    | 'cache-first'
-    | 'cache-and-network'
-    | 'network-only'
-    | 'cache-only'
-    | 'no-cache'
-    | 'standby';
+       export type FetchPolicy =
+       | 'cache-first'
+       | 'cache-and-network'
+       | 'network-only'
+       | 'cache-only'
+       | 'no-cache'
+       | 'standby';
        */
-fetchPolicy: 'no-cache',
+      fetchPolicy: 'no-cache',
     },
   },
 });

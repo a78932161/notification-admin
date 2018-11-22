@@ -36,33 +36,65 @@ export const constantRouterMap = [
     }]
   },
   {
-    path: '/qx',
+    path: '/user',
     component: Layout,
-    redirect: '/qx/index',
-    name: 'qx',
-    meta: {title: '权限', icon: 'example'},
+    redirect: '/user',
+    name: 'user',
+    meta: {title: '角色', icon: 'example'},
     children: [
       {
-        path: 'test',
-        name: 'storeAdminTest',
-        component: _import('permission/index'),
-        meta: {title: '权限', icon: '店铺'}
+        path: 'user',
+        component: _import('user/index'),
+        meta: {title: '角色', icon: '店铺'}
+      },
+    ]
+  },
+  {
+    path: '/msg',
+    component: Layout,
+    redirect: '/msg',
+    name: 'msg',
+    meta: {title: '消息', icon: 'example'},
+    children: [
+      {
+        path: 'msg',
+        component: _import('msg/index'),
+        meta: {title: '发消息', icon: '店铺'}
       },
       {
-        path: 'store',
-        name: 'store',
-        component: _import('permission/role'),
-        meta: {title: '角色', icon: 'table'},
+        path: 'receiveMsg',
+        component: _import('msg/receive'),
+        meta: {title: '收消息', icon: '店铺'}
       },
     ]
   },
 
 
+  // {
+  //   path: '/qx',
+  //   component: Layout,
+  //   redirect: '/qx/index',
+  //   name: 'qx',
+  //   meta: {title: '权限', icon: 'example'},
+  //   children: [
+  //     {
+  //       path: 'test',
+  //       name: 'storeAdminTest',
+  //       component: _import('permission/index'),
+  //       meta: {title: '权限', icon: '店铺'}
+  //     },
+  //     {
+  //       path: 'store',
+  //       name: 'store',
+  //       component: _import('permission/role'),
+  //       meta: {title: '角色', icon: 'table'},
+  //     },
+  //   ]
+  // },
+
+
   {path: '*', redirect: '/404', hidden: true}
 ];
-
-
-
 
 
 export default new Router({

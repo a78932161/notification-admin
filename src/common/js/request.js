@@ -25,7 +25,7 @@ let config = {
 const service = axios.create({
   baseURL, // api的base_url
   timeout: 15000, // 请求超时时间
-  withCredentials: true
+  withCredentials: false
 });
 
 // request拦截器
@@ -50,7 +50,6 @@ service.interceptors.response.use(response => {
      * code为非20000是抛错 可结合自己业务进行修改
      */
 
-
     let token = response.headers[tokenName];
     if (token) {
       setToken(token);
@@ -60,33 +59,9 @@ service.interceptors.response.use(response => {
     console.log(res);
     return res;
 
-
-    /* if (res.code !== 20000) {
-       Message({
-         message: res.message,
-         type: 'error',
-         duration: 5 * 1000
-       })
-
-       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-         MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-           confirmButtonText: '重新登录',
-           cancelButtonText: '取消',
-           type: 'warning'
-         }).then(() => {
-           store.dispatch('FedLogOut').then(() => {
-             location.reload()// 为了重新实例化vue-router对象 避免bug
-           })
-         })
-       }
-       return Promise.reject('error')
-     } else {
-       return response.data
-     }*/
   },
   error => {
-    console.log('err' + error)// for debug
+    console.log('err' + error) // for debug
     let errcode = String(error);
     if (errcode.indexOf('401') > 0) {
       if (location.href === config.loginUrl) {    /*登陆页面401错误，提示用户名或者密码错误*/
@@ -95,16 +70,12 @@ service.interceptors.response.use(response => {
         });
       }
       else {
-
         Message.error({
           message: '超时'
         });
         console.log(config.loginUrl);
         removeToken();
         location.href = config.loginUrl;
-
-        //setLimited('true');
-        // setLimitedUrl(location.href);
       }
     }
 
